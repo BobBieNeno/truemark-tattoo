@@ -52,7 +52,7 @@ function HeroSection() {
       <p className={styles.heroTagline}>{t.hero.tagline}</p>
 
       <div className={styles.heroCtas}>
-        <Button variant="outline" to="/" sectionId="contact">
+        <Button variant="ghost" to="/" sectionId="contact">
           {t.hero.cta}
         </Button>
         <Button variant="ghost" to="/shop">
