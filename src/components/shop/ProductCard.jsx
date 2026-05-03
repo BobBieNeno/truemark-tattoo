@@ -1,3 +1,4 @@
+import { useLanguage } from '../../context/LanguageContext'
 import styles from './ProductCard.module.css'
 
 const BADGE_STYLES = {
@@ -10,6 +11,11 @@ const BADGE_STYLES = {
 
 function ProductCard({ product }) {
   const { name, nameTh, description, price, unit, badge, icon, available } = product
+  const { t, lang } = useLanguage()
+  const s = t.shop
+
+  // แสดงชื่อตามภาษา
+  const displayName = lang === 'th' ? nameTh : name
 
   const handleContact = () => {
     window.location.href = '/#contact'
@@ -28,8 +34,9 @@ function ProductCard({ product }) {
       </div>
 
       <div className={styles.info}>
-        <p className={styles.nameTh}>{nameTh}</p>
-        <h3 className={styles.name}>{name}</h3>
+        {/* แสดง nameTh หรือ name ตามภาษา */}
+        <p className={styles.nameTh}>{lang === 'th' ? name : nameTh}</p>
+        <h3 className={styles.name}>{displayName}</h3>
         <p className={styles.description}>{description}</p>
       </div>
 
@@ -42,9 +49,9 @@ function ProductCard({ product }) {
           className={styles.ctaBtn}
           onClick={handleContact}
           disabled={!available}
-          aria-label={"สอบถามเกี่ยวกับ " + name}
+          aria-label={`${s.askBtn} ${displayName}`}
         >
-          {available ? 'สอบถาม / สั่งซื้อ' : 'หมดสต็อก'}
+          {available ? s.askBtn : s.soldOut}
         </button>
       </div>
     </article>

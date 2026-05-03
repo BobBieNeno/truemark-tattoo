@@ -277,3 +277,38 @@
 @media (max-width: 600px) {
   .processGrid { grid-template-columns:1fr; }
 }
+
+/* ─── Hero Logo Image (รูปจริง) ─── */
+.heroLogoImg {
+  width: 170px;
+  height: 170px;
+  object-fit: contain;
+  filter: brightness(1.05) contrast(1.1) drop-shadow(0 0 30px rgba(200,200,200,0.08));
+  border-radius: 4px;
+}
+
+/* ─── Form Validation ─── */
+.inputError {
+  border-bottom-color: rgba(200, 100, 100, 0.6) !important;
+}
+.errorMsg {
+  font-size: 0.75rem;
+  color: rgba(200, 120, 120, 0.9);
+  letter-spacing: 0.05em;
+  margin-top: 0.2rem;
+  display: block;
+}
+
+/* ─── Success Message ─── */
+.successMsg {
+  width: 100%;
+  padding: 1.1rem 2rem;
+  background: rgba(126, 200, 160, 0.08);
+  border: 1px solid rgba(126, 200, 160, 0.25);
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  letter-spacing: 0.2em;
+  color: #7ec8a0;
+  text-align: center;
+  text-transform: uppercase;
+}

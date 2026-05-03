@@ -1,93 +1,165 @@
-/* Base */
+/* ════════════════════════════════
+   Button — True Mark Design System
+   ════════════════════════════════ */
+
+/* ── Base ── */
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 1rem;
+  justify-content: center;
   font-family: var(--font-display);
-  font-size: 0.75rem;
-  /* เดิม 0.6rem */
-  letter-spacing: 0.35em;
+  letter-spacing: 0.3em;
   text-transform: uppercase;
-  color: var(--color-silver);
-  transition: color 0.3s ease;
-  position: relative;
   cursor: pointer;
-}
-
-.btn::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--color-silver);
-  transition: width 0.4s ease;
-}
-
-.btn:hover::after {
-  width: 100%;
-}
-
-/* Arrow variant  */
-.text {
-  line-height: 1;
-
-}
-
-.arrow {
-  display: block;
-  width: 42px;
-  height: 1px;
-  background: var(--color-silver-dim);
+  transition: all 0.35s ease;
   position: relative;
-  transition: width 0.4s ease;
-  flex-shrink: 0;
+  white-space: nowrap;
+  text-decoration: none;
+  border: none;
+  background: none;
+  color: var(--color-silver);
+}
+.btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
+.text { line-height: 1; }
+
+/* ─────────────────────────────
+   ARROW VARIANT
+   เส้น + หัวลูกศร + ข้อความ ต่อกันในบรรทัดเดียว
+   ───────────────────────────── */
+.arrow {
+  font-size: 0.75rem;
+  padding: 0.5rem 0;
+  color: var(--color-silver);
+}
+
+/* wrapper ภายใน arrow: จัดให้เส้นกับข้อความอยู่บรรทัดเดียวกัน */
+.arrowInner {
+  display: inline-flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* เส้นลูกศร */
+.arrowLine {
+  display: block;
+  position: relative;
+  width: 44px;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.5;
+  flex-shrink: 0;
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1),
+              opacity 0.35s ease;
+}
+
+/* หัวลูกศร */
+.arrowHead {
+  position: absolute;
+  right: -1px;
+  top: 50%;
+  transform: translateY(-50%) rotate(45deg);
+  width: 7px;
+  height: 7px;
+  border-right: 1.5px solid currentColor;
+  border-top: 1.5px solid currentColor;
+}
+
+/* hover: เส้นยาวขึ้น + สว่างขึ้น */
+.arrow:hover .arrowLine {
+  width: 68px;
+  opacity: 1;
+}
+.arrow:hover { color: var(--color-silver-light); }
+
+/* underline เส้นเล็กใต้ตัวหนังสือ */
 .arrow::after {
   content: '';
   position: absolute;
-  right: 0;
-  top: -3px;
-  width: 6px;
-  height: 6px;
-  border-right: 1px solid var(--color-silver-dim);
-  border-top: 1px solid var(--color-silver-dim);
-  transform: rotate(45deg);
+  bottom: 0;
+  left: calc(44px + 1rem);    /* เริ่มหลังลูกศร */
+  width: 0;
+  height: 1px;
+  background: var(--color-silver-light);
+  transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
 }
+.arrow:hover::after { width: calc(100% - 44px - 1rem); }
 
-.btn:hover .arrow {
-  width: 64px;
-}
-
-/* Outline variant */
+/* ─────────────────────────────
+   OUTLINE VARIANT
+   กรอบสี่เหลี่ยม elegant
+   ───────────────────────────── */
 .outline {
-  border: 1px solid rgba(200, 200, 200, 0.2);
-  padding: 0.85rem 2rem;
   font-size: 0.72rem;
-  /* เดิม 0.65rem */
   letter-spacing: 0.28em;
-  transition: border-color 0.3s ease, background 0.3s ease, color 0.3s ease;
-}
-
-.outline:hover {
-  border-color: rgba(200, 200, 200, 0.5);
-  background: rgba(200, 200, 200, 0.04);
-}
-
-.outline::after {
-  display: none;
-}
-
-/* Ghost variant */
-.ghost {
+  padding: 0.9rem 2.2rem;
+  border: 1px solid rgba(200,200,200,0.2);
   color: var(--color-silver-dim);
-  font-size: 0.72rem;
-  /* เดิม 0.6rem */
-  letter-spacing: 0.28em;
+  transition: border-color 0.35s ease,
+              background   0.35s ease,
+              color        0.35s ease;
+}
+.outline:hover {
+  border-color: rgba(200,200,200,0.55);
+  background: rgba(200,200,200,0.05);
+  color: var(--color-silver-light);
 }
 
-.ghost:hover {
-  color: var(--color-silver-light);
+/* ─────────────────────────────
+   GHOST VARIANT
+   ไม่มีกรอบ — สำหรับ secondary action
+   ───────────────────────────── */
+.ghost {
+  font-size: 0.72rem;
+  letter-spacing: 0.28em;
+  color: var(--color-silver-dim);
+  padding: 0.5rem 0;
+}
+.ghost:hover { color: var(--color-silver-light); }
+.ghost::after {
+  content: '';
+  position: absolute;
+  bottom: 0; left: 0;
+  width: 0; height: 1px;
+  background: var(--color-silver-dim);
+  transition: width 0.35s ease;
+}
+.ghost:hover::after { width: 100%; }
+
+/* ─────────────────────────────
+   SUBMIT VARIANT
+   ปุ่ม submit form — full width, สีสว่างกว่า
+   ───────────────────────────── */
+.submit {
+  font-size: 0.75rem;
+  letter-spacing: 0.35em;
+  padding: 1.1rem 2rem;
+  width: 100%;
+  justify-content: center;
+  color: var(--color-black);
+  background: var(--color-silver);
+  border: 1px solid var(--color-silver);
+  transition: background 0.35s ease,
+              color      0.35s ease,
+              transform  0.2s ease,
+              box-shadow 0.35s ease;
+}
+.submit:hover {
+  background: var(--color-silver-light);
+  border-color: var(--color-silver-light);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(200,200,200,0.12);
+}
+.submit:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+.submit:disabled {
+  background: rgba(200,200,200,0.15);
+  border-color: transparent;
+  color: var(--color-silver-dim);
 }
