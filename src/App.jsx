@@ -1,27 +1,26 @@
 /**
  * App.jsx — Root component
- * ครอบด้วย LanguageProvider เพื่อให้ทุก component เข้าถึงภาษาได้
+ *
+ * ไม่ต้องมี LanguageProvider แล้ว
+ * react-i18next จัดการ global state ให้เอง
  */
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
-import { LanguageProvider } from './context/LanguageContext'
-import Navbar from './components/layout/Navbar'
-import Footer from './components/layout/Footer'
-import HomePage from './pages/HomePage'
-import ShopPage from './pages/ShopPage'
+import Navbar    from './components/layout/Navbar'
+import Footer    from './components/layout/Footer'
+import HomePage  from './pages/HomePage'
+import ShopPage  from './pages/ShopPage'
 import './styles/global.css'
 
 function App() {
   return (
-    <LanguageProvider>
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/"     element={<HomePage />} />
-          <Route path="/shop" element={<ShopPage />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
-    </LanguageProvider>
+    <BrowserRouter>
+      <Navbar />
+      <Routes>
+        <Route path="/"     element={<HomePage />} />
+        <Route path="/shop" element={<ShopPage />} />
+      </Routes>
+      <Footer />
+    </BrowserRouter>
   )
 }
 

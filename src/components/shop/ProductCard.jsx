@@ -1,5 +1,5 @@
-import { useLanguage } from '../../context/LanguageContext'
-import styles from './ProductCard.module.css'
+import { useTranslation } from 'react-i18next'
+import styles             from './ProductCard.module.css'
 
 const BADGE_STYLES = {
   'Best Seller': styles.badgeSeller,
@@ -10,16 +10,18 @@ const BADGE_STYLES = {
 }
 
 function ProductCard({ product }) {
-  const { name, nameTh, description, price, unit, badge, icon, available } = product
-  const { t, lang } = useLanguage()
-  const s = t.shop
+  const { name, nameTh, price, unit, badge, icon, available, id } = product
+  const { t, i18n } = useTranslation()
+  const isThai      = i18n.language === 'th'
 
-  // แสดงชื่อตามภาษา
-  const displayName = lang === 'th' ? nameTh : name
+  // ชื่อสินค้าตามภาษา
+  const displayName = isThai ? nameTh : name
 
-  const handleContact = () => {
-    window.location.href = '/#contact'
-  }
+  // description ดึงจาก i18n ตาม index (id เริ่มจาก 1)
+  const productDescs = t('shop.products', { returnObjects: true })
+  const desc = Array.isArray(productDescs) ? (productDescs[id - 1]?.desc || '') : ''
+
+  const handleContact = () => { window.location.href = '/#contact' }
 
   return (
     <article className={styles.card}>
@@ -28,18 +30,15 @@ function ProductCard({ product }) {
           {badge}
         </span>
       )}
-
       <div className={styles.iconWrap} aria-hidden="true">
         <span className={styles.icon}>{icon}</span>
       </div>
-
       <div className={styles.info}>
-        {/* แสดง nameTh หรือ name ตามภาษา */}
-        <p className={styles.nameTh}>{lang === 'th' ? name : nameTh}</p>
+        <p className={styles.nameTh}>{isThai ? name : nameTh}</p>
         <h3 className={styles.name}>{displayName}</h3>
-        <p className={styles.description}>{description}</p>
+        {/* description เปลี่ยนตามภาษา */}
+        <p className={styles.description}>{desc}</p>
       </div>
-
       <div className={styles.footer}>
         <div className={styles.priceWrap}>
           <span className={styles.price}>{price.toLocaleString()}</span>
@@ -49,9 +48,9 @@ function ProductCard({ product }) {
           className={styles.ctaBtn}
           onClick={handleContact}
           disabled={!available}
-          aria-label={`${s.askBtn} ${displayName}`}
+          aria-label={`${t(available ? 'shop.askBtn' : 'shop.soldOut')} — ${displayName}`}
         >
-          {available ? s.askBtn : s.soldOut}
+          {available ? t('shop.askBtn') : t('shop.soldOut')}
         </button>
       </div>
     </article>

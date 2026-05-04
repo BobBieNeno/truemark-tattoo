@@ -14,7 +14,23 @@
     ]
   },
   "services": {
-    "sub": "Every style, every scale, every vision — we bring it to life on your skin."
+    "sub": "Every style, every scale, every vision — we bring it to life on your skin.",
+    "items": [
+      { "desc": "Bespoke designs crafted exclusively for you — conveying your personal story. No two are alike in the world." },
+      { "desc": "Delicate, precise linework for those who appreciate subtlety and refinement in their art." },
+      { "desc": "Bold, powerful black ink — from geometric to tribal to illustrative, each piece is distinctly yours." },
+      { "desc": "Lifelike portraits with extraordinary detail — people, animals, or nature rendered on skin." },
+      { "desc": "Transform old tattoos into fresh, beautiful works using refined technique and years of experience." },
+      { "desc": "Keep your tattoo looking its best with our professional touch-up service and aftercare guidance." }
+    ]
+  },
+  "process": {
+    "steps": [
+      { "desc": "We talk through your vision, the meaning behind it, and the style that best represents you." },
+      { "desc": "A custom design is crafted specifically for you, refined through revisions until it's perfect." },
+      { "desc": "We tattoo in a clean, safe environment using medical-grade equipment and sterile materials." },
+      { "desc": "We guide you through proper aftercare so your tattoo heals beautifully and lasts." }
+    ]
   },
   "gallery": {
     "cta": "Free Consultation"
@@ -54,6 +70,14 @@
       { "desc": "Every product is tested by tattoo artists and skincare specialists." },
       { "desc": "Nationwide delivery with usage guidance from True Mark." },
       { "desc": "Not satisfied? Full refund within 7 days, no questions asked." }
+    ],
+    "products": [
+      { "desc": "A natural-formula balm that deeply moisturizes and keeps your tattoo vivid for longer." },
+      { "desc": "Gentle on fresh skin — reduces inflammation and maintains pH balance for the first 1–2 weeks." },
+      { "desc": "Shields your tattoo from UV rays, preventing fading. Safe for daily use once healed." },
+      { "desc": "100% premium cotton, oversized cut, screen-printed TM Monogram in silver tone." },
+      { "desc": "Balm + Foam + Sunscreen bundled in a True Mark gift box — better value than buying separately." },
+      { "desc": "Give the gift of a tattoo experience. Choose any value from 500 – 5,000 THB." }
     ],
     "ctaSub": "Free consultation, no commitment. Contact us anytime.",
     "ctaBook": "Book a Session",

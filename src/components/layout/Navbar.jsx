@@ -1,32 +1,30 @@
 /**
- * Navbar Component
- * แก้ไข:
- * - เปลี่ยนโลโก้จาก SVG → รูปจริง (logo-true-mark.jpg)
- * - เพิ่ม LanguageToggle
- * - ใช้ translations จาก useLanguage
+ * Navbar — ใช้ useTranslation จาก react-i18next
+ * Nav labels: English เสมอ (hardcode)
  */
 import { useState, useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
-import LanguageToggle from '../ui/LanguageToggle'
-import useScrollTo from '../../hooks/useScrollTo'
-import { useLanguage } from '../../context/LanguageContext'
-import styles from './Navbar.module.css'
+import { useLocation }         from 'react-router-dom'
+import { useTranslation }      from 'react-i18next'
+import LanguageToggle          from '../ui/LanguageToggle'
+import useScrollTo             from '../../hooks/useScrollTo'
+import styles                  from './Navbar.module.css'
+
+// Nav links — label English เสมอ
+const NAV_LINKS = [
+  { label: 'Home',     path: '/',     sectionId: null       },
+  { label: 'Concept',  path: '/',     sectionId: 'concept'  },
+  { label: 'Services', path: '/',     sectionId: 'services' },
+  { label: 'Shop',     path: '/shop', sectionId: null       },
+  { label: 'Contact',  path: '/',     sectionId: 'contact'  },
+]
 
 function Navbar() {
-  const [scrolled,  setScrolled]  = useState(false)
-  const [menuOpen,  setMenuOpen]  = useState(false)
-  const location                  = useLocation()
-  const scrollTo                  = useScrollTo()
-  const { t }                     = useLanguage()
-
-  // Nav links ใช้ label จาก translations
-  const NAV_LINKS = [
-    { label: t.nav.home,     path: '/',     sectionId: null       },
-    { label: t.nav.concept,  path: '/',     sectionId: 'concept'  },
-    { label: t.nav.services, path: '/',     sectionId: 'services' },
-    { label: t.nav.shop,     path: '/shop', sectionId: null       },
-    { label: t.nav.contact,  path: '/',     sectionId: 'contact'  },
-  ]
+  const [scrolled, setScrolled] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
+  const location                = useLocation()
+  const scrollTo                = useScrollTo()
+  // useTranslation ยังคง import ไว้เพื่อ trigger re-render เมื่อภาษาเปลี่ยน
+  useTranslation()
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 60)
@@ -46,7 +44,7 @@ function Navbar() {
     <header className={[styles.header, scrolled ? styles.scrolled : ''].join(' ')}>
       <nav className={styles.nav}>
 
-        {/* ── Logo (รูปจริง) ── */}
+        {/* Logo */}
         <a
           href="/"
           className={styles.logoLink}
@@ -55,15 +53,14 @@ function Navbar() {
         >
           <img
             src="/logo-true-mark.jpg"
-            alt="True Mark Tattoo Logo"
+            alt="True Mark Tattoo"
             className={styles.logoImg}
-            width={38}
-            height={38}
+            width={38} height={38}
           />
           <span className={styles.logoText}>True Mark</span>
         </a>
 
-        {/* ── Desktop links ── */}
+        {/* Desktop links */}
         <ul className={styles.links} role="menubar">
           {NAV_LINKS.map((link) => (
             <li key={link.label} role="none">
@@ -82,7 +79,7 @@ function Navbar() {
           ))}
         </ul>
 
-        {/* ── Right: Language toggle + Hamburger ── */}
+        {/* Right: Language toggle + hamburger */}
         <div className={styles.rightGroup}>
           <LanguageToggle />
           <button
@@ -97,7 +94,7 @@ function Navbar() {
 
       </nav>
 
-      {/* ── Mobile dropdown ── */}
+      {/* Mobile dropdown */}
       <div
         className={[styles.mobileMenu, menuOpen ? styles.mobileOpen : ''].join(' ')}
         aria-hidden={!menuOpen}
@@ -112,7 +109,6 @@ function Navbar() {
             {link.label}
           </a>
         ))}
-        {/* Language toggle ใน mobile menu */}
         <div className={styles.mobileLangWrap}>
           <LanguageToggle />
         </div>

@@ -1,43 +1,40 @@
-import { useState } from 'react'
-import ProductCard from './ProductCard'
-import RevealWrapper from '../ui/RevealWrapper'
-import { products, getProductsByCategory } from '../../data/products'
-import { useLanguage } from '../../context/LanguageContext'
-import styles from './ProductGrid.module.css'
+import { useState }        from 'react'
+import { useTranslation }  from 'react-i18next'
+import ProductCard         from './ProductCard'
+import RevealWrapper       from '../ui/RevealWrapper'
+import { getProductsByCategory } from '../../data/products'
+import styles              from './ProductGrid.module.css'
 
-// Categories แปลตามภาษา
-const CATEGORIES_TH = [
-  { id:'all',       label:'ทั้งหมด'     },
-  { id:'aftercare', label:'Aftercare'   },
-  { id:'merch',     label:'Merchandise' },
-  { id:'voucher',   label:'Gift Voucher'},
-]
-const CATEGORIES_EN = [
-  { id:'all',       label:'All'         },
-  { id:'aftercare', label:'Aftercare'   },
-  { id:'merch',     label:'Merchandise' },
-  { id:'voucher',   label:'Gift Voucher'},
-]
+// Category ids คงที่ — labels เปลี่ยนตามภาษา
+const CATEGORY_IDS = ['all', 'aftercare', 'merch', 'voucher']
 
 function ProductGrid() {
   const [activeCategory, setActiveCategory] = useState('all')
-  const { lang } = useLanguage()
-  const categories = lang === 'th' ? CATEGORIES_TH : CATEGORIES_EN
-  const filtered   = getProductsByCategory(activeCategory)
+  const { t } = useTranslation()
+
+  // Labels แบบ dynamic ตามภาษา
+  const categoryLabels = {
+    all:       t('shop.filterAll'),
+    aftercare: 'Aftercare',
+    merch:     'Merchandise',
+    voucher:   'Gift Voucher',
+  }
+
+  const filtered = getProductsByCategory(activeCategory)
 
   return (
     <div className={styles.wrapper}>
-      {/* Category filters */}
+      {/* Filter tabs */}
       <div className={styles.filters} role="tablist" aria-label="Product categories">
-        {categories.map((cat) => (
+        {CATEGORY_IDS.map((id) => (
           <button
-            key={cat.id}
+            key={id}
             role="tab"
-            aria-selected={activeCategory === cat.id}
-            className={[styles.filterBtn, activeCategory === cat.id ? styles.active : ''].join(' ')}
-            onClick={() => setActiveCategory(cat.id)}
+            aria-selected={activeCategory === id}
+            className={[styles.filterBtn, activeCategory === id ? styles.active : ''].join(' ')}
+            onClick={() => setActiveCategory(id)}
           >
-            {cat.label}
+            {categoryLabels[id]}
           </button>
         ))}
       </div>
@@ -52,9 +49,7 @@ function ProductGrid() {
       </div>
 
       {filtered.length === 0 && (
-        <p className={styles.empty}>
-          {lang === 'th' ? 'ไม่มีสินค้าในหมวดหมู่นี้' : 'No products in this category.'}
-        </p>
+        <p className={styles.empty}>{t('shop.emptyCategory')}</p>
       )}
     </div>
   )
