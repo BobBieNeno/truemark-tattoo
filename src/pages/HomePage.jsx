@@ -173,7 +173,10 @@ function ProcessSection() {
 function GallerySection() {
   const { t }      = useTranslation()
   const sectionRef = useReveal()
-  const { ref: parallaxRef, style: parallaxStyle } = useParallax(0.12)
+  const { ref: parallaxRef, style: parallaxStyle } = useParallax(
+    0.12,
+    (offset) => `translate(-50%, calc(-50% + ${offset}px))`
+  )
 
   const galleryItems = [
     { label:'Featured Work', span:true },
@@ -215,7 +218,10 @@ function GallerySection() {
 /* ─── Quote ─── */
 function QuoteSection() {
   const { t } = useTranslation()
-  const { ref: parallaxRef, style: parallaxStyle } = useParallax(0.1)
+  const { ref: parallaxRef, style: parallaxStyle } = useParallax(
+    0.1,
+    (offset) => `translate(-50%, ${offset}px)`
+  )
 
   return (
     <section className={styles.quoteSection} aria-label="Brand quote">

@@ -23,10 +23,10 @@ i18n
 
     // ภาษาเริ่มต้น — ดึงจาก localStorage ที่บันทึกไว้ก่อน ไม่งั้นใช้ 'th'
     lng: (() => {
-      try { return localStorage.getItem('tm_lang') || 'th' } catch { return 'th' }
+      try { return localStorage.getItem('tm_lang') || 'en' } catch { return 'en' }
     })(),
 
-    fallbackLng: 'th',  // ถ้าหา key ไม่เจอใน en → ใช้ th แทน
+    fallbackLng: 'en',
 
     interpolation: {
       escapeValue: false, // React ทำ XSS protection อยู่แล้ว ไม่ต้อง escape ซ้ำ

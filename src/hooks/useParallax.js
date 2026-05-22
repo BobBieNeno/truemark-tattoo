@@ -10,7 +10,7 @@
  */
 import { useEffect, useRef, useState } from 'react'
 
-function useParallax(speed = 0.2) {
+function useParallax(speed = 0.2, composeTransform = (offset) => `translateY(${offset}px)`) {
   const ref = useRef(null)
   const [offset, setOffset] = useState(0)
 
@@ -18,6 +18,7 @@ function useParallax(speed = 0.2) {
     let animationFrame
 
     const handleScroll = () => {
+      cancelAnimationFrame(animationFrame)
       animationFrame = requestAnimationFrame(() => {
         const element = ref.current
         if (!element) return
@@ -45,7 +46,7 @@ function useParallax(speed = 0.2) {
   }, [speed])
 
   const style = {
-    transform: `translateY(${offset}px)`,
+    transform: composeTransform(offset),
     willChange: 'transform', // บอก browser ล่วงหน้าเพื่อ GPU acceleration
   }
 
