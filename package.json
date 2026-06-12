@@ -5,9 +5,6 @@
   "workspaces": [
     "frontend"
   ],
-  "engines": {
-    "node": "20.x"
-  },
   "scripts": {
     "dev": "npm run dev --workspace frontend --",
     "build": "npm run build --workspace frontend",
