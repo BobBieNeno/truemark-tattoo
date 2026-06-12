@@ -1,58 +1,50 @@
-# True Mark Tattoo — Website
+# True Mark Tattoo Frontend
 
-## 🚀 วิธีรัน
+เว็บไซต์ True Mark Tattoo พัฒนาด้วย React และ Vite โดย source code อยู่ใน
+`frontend/`
+
+## วิธีรัน
+
+ติดตั้ง dependencies และรันจาก repository root:
 
 ```bash
-# 1. ติดตั้ง dependencies
 npm install
-
-# 2. รัน development server
 npm run dev
-
-# 3. เปิดเบราว์เซอร์ที่ http://localhost:5173
 ```
 
-## 📁 โครงสร้างไฟล์
+สร้าง production build:
 
-```
-src/
-├── components/
-│   ├── ui/          ← Reusable UI components
-│   ├── layout/      ← Navbar, Footer
-│   └── shop/        ← ProductCard, ProductGrid
-├── pages/
-│   ├── HomePage.jsx ← หน้าหลัก
-│   └── ShopPage.jsx ← หน้าร้านค้า
-├── data/
-│   ├── services.js  ← ✏️ แก้บริการที่นี่
-│   └── products.js  ← ✏️ เพิ่มสินค้าที่นี่
-├── hooks/
-│   ├── useReveal.js    ← Scroll animation
-│   └── useParallax.js  ← Parallax effect
-└── styles/
-    ├── tokens.js    ← Design system values
-    └── global.css   ← Global CSS variables
+```bash
+npm run build
 ```
 
-## ✏️ วิธีเพิ่มสินค้า
+## เชื่อมต่อ Backend
 
-เปิดไฟล์ `src/data/products.js` แล้ว copy object ด้านล่าง:
+คัดลอก `frontend/.env.example` เป็น `frontend/.env.local` และกำหนด URL ของ
+backend:
 
-```js
-{
-  id: 7,                        // ← ต้องไม่ซ้ำกับตัวอื่น
-  category: 'aftercare',        // aftercare | merch | voucher
-  name: 'Product Name',
-  nameTh: 'ชื่อสินค้าภาษาไทย',
-  description: 'รายละเอียดสินค้า',
-  price: 390,
-  unit: 'บาท / ชิ้น',
-  badge: 'New',                 // หรือ null ถ้าไม่มี badge
-  icon: '◈',
-  available: true,
-}
+```env
+VITE_API_BASE_URL=http://localhost:3000
 ```
 
-## 🎨 วิธีเปลี่ยนสี / Font
+หากไม่ได้กำหนดตัวแปรนี้ หน้า Shop จะใช้ข้อมูล local สำหรับพัฒนา frontend
 
-แก้ที่ `src/styles/global.css` ในส่วน `:root { ... }`
+การชำระผ่านบัตรใช้ Hosted Checkout โดย frontend เรียก:
+
+```text
+POST /api/payments/session
+```
+
+Backend ต้องตรวจสอบราคาและสต็อกใหม่ทั้งหมด แล้วตอบกลับด้วย `{ "url": "..." }`
+สำหรับ redirect ไปหน้าชำระเงินของ provider ระบบ frontend จะไม่รับหรือเก็บข้อมูลบัตร
+
+การวิเคราะห์ภาพรอยสักด้วย Gemini ใช้ endpoint:
+
+```text
+POST /api/estimates/analyze
+Content-Type: multipart/form-data
+```
+
+Backend ต้องเป็นผู้เก็บ `GEMINI_API_KEY`, เรียก Gemini Vision, ตรวจผลลัพธ์ด้วย
+schema และส่ง structured analysis กลับมา ห้ามใส่ Gemini API key ในตัวแปร
+`VITE_*` เพราะจะถูกเปิดเผยใน browser
