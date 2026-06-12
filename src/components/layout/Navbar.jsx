@@ -15,7 +15,6 @@ const NAV_LINKS = [
   { label: 'Concept',  path: '/',     sectionId: 'concept'  },
   { label: 'Services', path: '/',     sectionId: 'services' },
   { label: 'Shop',     path: '/shop', sectionId: null       },
-  { label: 'Estimate', path: '/estimate', sectionId: null   },
   { label: 'AI Price', path: '/ai-estimate', sectionId: null },
   { label: 'Contact',  path: '/',     sectionId: 'contact'  },
 ]

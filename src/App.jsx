@@ -9,7 +9,6 @@ import Navbar    from './components/layout/Navbar'
 import Footer    from './components/layout/Footer'
 import HomePage  from './pages/HomePage'
 import ShopPage  from './pages/ShopPage'
-import EstimatePage from './pages/EstimatePage'
 import NotFoundPage from './pages/NotFoundPage'
 import CartPage from './pages/CartPage'
 import CheckoutPage from './pages/CheckoutPage'
@@ -24,7 +23,6 @@ function App() {
       <Routes>
         <Route path="/"     element={<HomePage />} />
         <Route path="/shop" element={<ShopPage />} />
-        <Route path="/estimate" element={<EstimatePage />} />
         <Route path="/ai-estimate" element={<AiEstimatePage />} />
         <Route path="/cart" element={<CartPage />} />
         <Route path="/checkout" element={<CheckoutPage />} />

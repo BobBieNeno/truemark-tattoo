@@ -44,7 +44,7 @@ function HeroSection() {
       <p className={styles.heroTagline}>{t('hero.tagline')}</p>
 
       <div className={styles.heroCtas}>
-        <Button variant="outline" to="/estimate">{t('hero.cta')}</Button>
+        <Button variant="outline" to="/ai-estimate">{t('hero.cta')}</Button>
         <Button variant="ghost"   to="/shop">{t('hero.shop')}</Button>
       </div>
 

@@ -158,7 +158,7 @@ function AiEstimatePage() {
           </div>
           <div className={styles.actions}>
             <button onClick={reset}>{t('aiEstimate.tryAnother')}</button>
-            <Button variant="outline" to="/estimate">{t('aiEstimate.artistReview')}</Button>
+            <Button variant="outline" to="/" sectionId="contact">{t('aiEstimate.artistReview')}</Button>
           </div>
         </section>
       )}

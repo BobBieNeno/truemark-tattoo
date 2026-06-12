@@ -13,7 +13,6 @@ const NAV_ITEMS = [
   { label:'Services',  path:'/', sectionId:'services'  },
   { label:'Portfolio', path:'/', sectionId:'gallery'   },
   { label:'Shop',      path:'/shop', sectionId: null   },
-  { label:'Estimate',  path:'/estimate', sectionId: null },
   { label:'AI Price',  path:'/ai-estimate', sectionId: null },
   { label:'Contact',   path:'/', sectionId:'contact'   },
 ]
